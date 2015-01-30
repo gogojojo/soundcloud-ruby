@@ -15,7 +15,7 @@ gem install soundcloud
 #### Print links of the 10 hottest tracks
 ```ruby
 # register a client with YOUR_CLIENT_ID as client_id_
-client = SoundCloud.new(:client_id => YOUR_CLIENT_ID)
+client = Soundcloud.new(:client_id => YOUR_CLIENT_ID)
 # get 10 hottest tracks
 tracks = client.get('/tracks', :limit => 10, :order => 'hotness')
 # print each link
@@ -29,7 +29,7 @@ end
 # register a new client, which will exchange the username, password for an access_token
 # NOTE: the SoundCloud API Docs advise not to use the user credentials flow in a web app.
 # In any case, never store the password of a user.
-client = SoundCloud.new({
+client = Soundcloud.new({
   :client_id     => YOUR_CLIENT_ID,
   :client_secret => YOUR_CLIENT_SECRET,
   :username      => 'some@email.com',
@@ -42,7 +42,7 @@ puts client.get('/me').username
 
 #### OAuth2 authorization code flow
 ```ruby
-client = SoundCloud.new({
+client = Soundcloud.new({
   :client_id     => YOUR_CLIENT_ID,
   :client_secret => YOUR_CLIENT_SECRET,
   :redirect_uri  => YOUR_REDIRECT_URI,
@@ -58,7 +58,7 @@ client.exchange_token(:code => params[:code])
 #### OAuth2 refresh token flow, upload a track and print its link
 ```ruby
 # register a new client which will exchange an existing refresh_token for an access_token
-client = SoundCloud.new({
+client = Soundcloud.new({
   :client_id     => YOUR_CLIENT_ID,
   :client_secret => YOUR_CLIENT_SECRET,
   :refresh_token => SOME_REFRESH_TOKEN
@@ -77,7 +77,7 @@ puts track.permalink_url
 #### Resolve a track url and print its id
 ```ruby
 # register the client
-client = SoundCloud.new(:client_id => YOUR_CLIENT_ID)
+client = Soundcloud.new(:client_id => YOUR_CLIENT_ID)
 
 # call the resolve endpoint with a track url
 track = client.get('/resolve', :url => "http://soundcloud.com/forss/flickermood")
@@ -89,7 +89,7 @@ puts track.id
 ### Initializing a client with an access token and updating the users profile description
 ```ruby
 # initializing a client with an access token
-client = SoundCloud.new(:access_token => SOME_ACCESS_TOKEN)
+client = Soundcloud.new(:access_token => SOME_ACCESS_TOKEN)
 
 # updating the users profile description
 client.put("/me", :user => {:description => "a new description"})
@@ -97,7 +97,7 @@ client.put("/me", :user => {:description => "a new description"})
 
 ### Add a track to a playlist / set
 ```ruby
-client = SoundCloud.new(:access_token => "A_VALID_TOKEN")
+client = Soundcloud.new(:access_token => "A_VALID_TOKEN")
 
 # get my last playlist
 playlist = client.get("/me/playlists").first
@@ -121,7 +121,7 @@ p playlist.tracks.map(&:id)
 ```
 
 ## Interface
-#### SoundCloud.new(options={})
+#### Soundcloud.new(options={})
 Stores the passed options and call exchange_token in case options are passed
 that allow an exchange of tokens.
 
